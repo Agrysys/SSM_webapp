@@ -17,19 +17,30 @@ class Melon(models.Model):
         (BUKAN_MELON,"not melon")
     ]
     kode_melon = models.TextField(verbose_name="kode melon",primary_key=True,max_length=10)
-    file_path = models.FileField(upload_to="storage/melon")
+    image = models.ImageField(upload_to="melon/", default="melon/no_im.jpeg")
     object_class = models.TextField(choices=CLASS_MELON)
     pub_date = models.DateField()
     Glcm = models.OneToOneField("Glcm",on_delete=models.CASCADE)
     
     def generate_kode_melon(kode):
-        last_melon = Melon.objects.filter(kode_melon__startswith=kode)
-        kode_counter = int(last_melon.kode_melon[2:])
-        kode_counter += 1
-        s_kosong = ""
-        for kosong in range(len(str(kode_counter))):
-            s_kosong += kosong
-        return kode+s_kosong
+        if Melon.objects.filter(kode_melon__startswith=kode).exists():
+            last_melon = Melon.objects.filter(kode_melon__startswith=kode).order_by('kode_melon').last()
+            print(f"Last melon: {last_melon}")
+        else:
+            return kode+"00000001"
+        
+        if last_melon is not None:
+            kode_counter = int(last_melon.kode_melon[2:])
+            print(f"Kode counter 1: {kode_counter}")
+            kode_counter += 1
+            s_kosong = str("")
+            print(f"Kode counter 2: {kode_counter}")
+            for kosong in range(8-len(str(kode_counter))):
+                s_kosong += str(0)
+            return kode+s_kosong+str(kode_counter)
+        else:
+            print("No last melon found.")
+
     
 class Glcm(models.Model):
     contrast_0 = models.FloatField()

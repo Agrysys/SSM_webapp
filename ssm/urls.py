@@ -10,6 +10,7 @@ api_Patern = [
 urlpatterns = [
     path("image", views.index, name="index"),
     path("coba", views.coba),
-    path("api/v1/",include(api_Patern))
+    path("api/v1/",include(api_Patern)),
+    path("melon", views.data_melons, name="melon")
 ]
 

@@ -6,6 +6,7 @@ import random
 from PIL import Image
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from .models import Glcm, Melon
 from tensorflow.keras.models import load_model
 from django.core.files.storage import default_storage
@@ -97,10 +98,10 @@ def predict(request):
                 asm_135=glcm[23]
             )
             
-            kode_melon = str(random.randrange(0,100000000))
+            kode_melon = str(Melon.generate_kode_melon(predicted_category))
             melon = Melon.objects.create(
                 kode_melon=kode_melon,
-                file_path=file_path,
+                image=file_path,
                 object_class=predicted_category,
                 pub_date=timezone.now(), 
                 Glcm=glcm
@@ -118,12 +119,6 @@ def predict(request):
         return response
         
     
-
-def generate_kode_melon(kode):
-        last_melon = ra
-        kode_counter = int(last_melon.kode_melon[2:])
-        kode_counter += 1
-        s_kosong = ""
-        for kosong in range(len(str(kode_counter))):
-            s_kosong += kosong
-        return kode+s_kosong
+def data_melons(request):
+    melon = Melon.objects.all
+    return render(request,"ssm/data_melons.html",{'melons':melon})

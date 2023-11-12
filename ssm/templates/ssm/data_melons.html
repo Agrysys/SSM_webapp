@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}melons{% endblock title %}
+{% block content %}
+  <h2>Melons</h2>
+  <table>
+    <tr>
+        <th>kode melon</th>
+        <th>citra melon</th>
+        <th>kelas</th>
+        <th>tanggal</th>
+        <th>aksi</th>
+    </tr>
+    {% load static %}
+    {% for melon in melons %}
+    <tr>
+        <td>{{melon.kode_melon}}</td>
+        <td><img src="{{melon.image.url}}" alt="{{melon.image.url}}"></td>
+        <td>{{melon.object_class}}</td>
+        <td>{{melon.pub_date}}</td>
+        <td><button data-id-glcm="{{melon.glcm}}">tampilkan glcm</button></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+  <h3>GLCM melon</h3>
+  
+{% endblock %}

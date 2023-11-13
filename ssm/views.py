@@ -122,3 +122,41 @@ def predict(request):
 def data_melons(request):
     melon = Melon.objects.all
     return render(request,"ssm/data_melons.html",{'melons':melon})
+
+def get_glcm(request, pk):
+    glcm = Glcm.objects.get(pk=pk)
+    data = {
+        0 : {
+            "contrast" : glcm.contrast_0,
+            "dissimilarity" : glcm.dissimilarity_0,
+            "homogenity" : glcm.homogeneity_0,
+            "energy" : glcm.energy_0,
+            "corelation" : glcm.correlation_0,
+            "asm" : glcm.asm_0
+        },
+        45 : {
+            "contrast" : glcm.contrast_45,
+            "dissimilarity" : glcm.dissimilarity_45,
+            "homogenity" : glcm.homogeneity_45,
+            "energy" : glcm.energy_45,
+            "corelation" : glcm.correlation_45,
+            "asm" : glcm.asm_45
+        },
+        90 : {
+            "contrast" : glcm.contrast_90,
+            "dissimilarity" : glcm.dissimilarity_90,
+            "homogenity" : glcm.homogeneity_90,
+            "energy" : glcm.energy_90,
+            "corelation" : glcm.correlation_90,
+            "asm" : glcm.asm_90
+        },
+        135 : {
+            "contrast" : glcm.contrast_135,
+            "dissimilarity" : glcm.dissimilarity_135,
+            "homogenity" : glcm.homogeneity_135,
+            "energy" : glcm.energy_135,
+            "corelation" : glcm.correlation_135,
+            "asm" : glcm.asm_135
+        }
+    }
+    return JsonResponse(data)

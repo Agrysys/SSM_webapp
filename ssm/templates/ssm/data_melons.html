@@ -1,6 +1,52 @@
 {% extends 'base.html' %}
 {% block title %}melons{% endblock title %}
 {% block content %}
+<script>
+  function showGlcm(button){
+    const glcm = button.getAttribute("data-id-glcm");
+    const pk = glcm.match(/\d+/)[0];
+    console.log(button)
+    getGlcm(pk);
+  }
+
+  function getGlcm(pk){
+    // Fetch the data
+    fetch('http://127.0.0.1:8000/ssm/api/v1/glcm/'+pk)
+      .then(response => response.json())
+      .then(data => {
+          // Get the table
+          const table = document.getElementById('table_glcm');
+          // Get the rows of the table
+          let rows = table.getElementsByTagName('tr');
+          // Create a data row for each angle
+          let index = 1;
+          for (const angle in data) {
+              // If the row exists, update it
+              if (rows[index]) {
+                  let cells = rows[index].getElementsByTagName('td');
+                  [angle, data[angle].contrast, data[angle].dissimilarity, data[angle].homogenity, data[angle].energy, data[angle].corelation, data[angle].asm].forEach((text, i) => {
+                      if (cells[i]) {
+                          cells[i].textContent = text;
+                      }
+                  });
+              } else {
+                  // If the row does not exist, create it
+                  const row = document.createElement('tr');
+
+                  [angle, data[angle].contrast, data[angle].dissimilarity, data[angle].homogenity, data[angle].energy, data[angle].corelation, data[angle].asm].forEach(text => {
+                      const td = document.createElement('td');
+                      td.textContent = text;
+                      row.appendChild(td);
+                  });
+                  table.appendChild(row);
+              }
+              index++;
+          }
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
+</script>
   <h2>Melons</h2>
   <table>
     <tr>
@@ -17,12 +63,31 @@
         <td><img src="{{melon.image.url}}" alt="{{melon.image.url}}"></td>
         <td>{{melon.object_class}}</td>
         <td>{{melon.pub_date}}</td>
-        <td><button data-id-glcm="{{melon.glcm}}">tampilkan glcm</button></td>
+        <td><button onclick=showGlcm(this) data-id-glcm="{{melon.Glcm}}">tampilkan glcm {{melon.Glcm}}</button></td>
     </tr>
     {% endfor %}
   </table>
 
 
   <h3>GLCM melon</h3>
+  <div id="glcm">
+    <table id="table_glcm">
+        <tr>
+            <td>Angle</td>
+            <td>Contrast</td>
+            <td>Dissimilarity</td>
+            <td>Homogeneity</td>
+            <td>Energy</td>
+            <td>Correlation</td>
+            <td>ASM</td>
+        </tr>
+        <!-- More rows will be added here by the JavaScript function -->
+    </table>
+  </div>
+
+
+  <script>
+    getGlcm(21);
+  </script>
   
 {% endblock %}

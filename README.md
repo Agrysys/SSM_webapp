@@ -19,18 +19,19 @@ Deskripsi singkat tentang proyek Anda.
     ```
 3. Buat virtual environment dan aktifkan:
 
-  for mac/linux
+   for mac/linux
     ```
     python3 -m venv env
-    source env/bin/activate
     ```
-  for windows 
+    for windows 
     ```
     py -m venv env
-    env\Scripts\activate
     ```
-    
-5. Install dependensi:
+5. Nasuk ke virtual environment
+   ```
+   env/bin/activate
+   ```
+6. Install dependensi:
     ```
     pip install -r requirements.txt
     ```

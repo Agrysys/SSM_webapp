@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}dashboard{% endblock title %}
+{% block content %}
+<h1>Dashboard</h1>
+<ul>
+    <li>matang      : {{jumlah_matang}}</li>
+    <li>mentah      : {{jumlah_mentah}}</li>
+    <li>bukan melon : {{jumlah_bukan}}</li>
+    <li>total       : {{jumlah_total}}</li>
+</ul>
+
+<div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+
+    const label_tanggal = JSON.parse('{{ label_chart|safe }}')
+    const data_jumlah_melon = JSON.parse('{{ data_chart|safe }}')
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: label_tanggal,
+        datasets: [{
+          label: 'jumlah melon',
+          data: data_jumlah_melon,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+{% endblock content %}

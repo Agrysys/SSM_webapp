@@ -14,13 +14,24 @@
             width : 100px;
             height : 100px;
         }
+
+        #myChart{
+            height : 100px;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Sistem Sortir Melon</h1>
     </header>
-
+    <nav>
+        <h2>navigasi</h2>
+        <ul>
+            <li><a href="{% url "ssm:dashboard" %}">dashboard</a></li>
+        
+            <li><a href="{% url "ssm:data.melon" %}">data melon</a></li>
+        </ul>
+    </nav>
     <main>
         {% block content %}{% endblock %}
     </main>

@@ -1,7 +1,7 @@
 import cv2
 import io
 import numpy as np
-import random
+import json
 
 from PIL import Image
 from django.http import HttpResponse, JsonResponse
@@ -11,6 +11,9 @@ from .models import Glcm, Melon
 from tensorflow.keras.models import load_model
 from django.core.files.storage import default_storage
 from django.utils import timezone
+from datetime import date, timedelta
+from django.db.models import Count
+from django.db.models.functions import Trunc
 
 
 def index(request):
@@ -122,6 +125,50 @@ def predict(request):
 def data_melons(request):
     melon = Melon.objects.all
     return render(request,"ssm/data_melons.html",{'melons':melon})
+
+def dashboard(request):
+    total = Melon.objects.count()
+    matang = Melon.objects.filter(object_class = Melon.MATANG).count()
+    mentah = Melon.objects.filter(object_class = Melon.MENTAH).count()
+    bukan = Melon.objects.filter(object_class = Melon.BUKAN_MELON).count()
+    
+    label = []
+    data = []
+    
+    # start_date = date(2023, 11, 13)  # replace with your start date
+    # end_date = timezone.now().date()
+    # delta = timedelta(days=1)
+    # context = {}
+    # while start_date <= end_date:
+    #     label = label.append(start_date)
+    #     melon_count = Melon.objects.filter(pub_date = start_date).count()
+    #     data = data.append(melon_count)
+    #     start_date += delta
+    
+    # melons = Melon.objects.order_by("pub_date")
+    # for melon in melons:
+    #     tanggl = str(melon.pub_date)
+    #     print(melon.pub_date)
+    #     label = label.append(tanggl)
+    #     data = Melon.objects.filter(pub_date = tanggl).count()
+    melons = Melon.objects.annotate(date=Trunc('pub_date', 'day')).values('date').annotate(count=Count('kode_melon')).order_by('date')
+
+    for melon in melons:
+        data.append(melon['count'])
+        label.append(melon['date'].strftime('%Y-%m-%d'))
+    
+    
+    context = {
+        "jumlah_total":total,
+        "jumlah_matang":matang,
+        "jumlah_mentah":mentah,
+        "jumlah_bukan":bukan,
+        "label_chart" : json.dumps(label),
+        "data_chart" : json.dumps(data)
+        
+    }
+    
+    return render(request=request, template_name="ssm/dashboard.html", context=context)
 
 def get_glcm(request, pk):
     glcm = Glcm.objects.get(pk=pk)

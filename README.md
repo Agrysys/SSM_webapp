@@ -25,6 +25,7 @@ Deskripsi singkat tentang proyek Anda.
     ```
     for windows 
     ```
+    Set-ExecutionPolicy Unrestricted -Scope Process  
     py -m venv env
     ```
 5. Nasuk ke virtual environment

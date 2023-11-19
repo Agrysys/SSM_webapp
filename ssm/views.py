@@ -53,7 +53,7 @@ def coba(request):
 
 @csrf_exempt
 def predict(request):
-    model = load_model("ssm\model_melon_gray_glcm_ep-30_btsz-64_optz-Adam.h5")
+    model = load_model("ssm/model_melon_gray_glcm_ep-30_btsz-32_optz-Adam_lyr-(32)(16)-acrsy85.71428656578064.h5")
     response = JsonResponse
     data = {
         "kode_melon":"",
@@ -71,7 +71,7 @@ def predict(request):
             feature = np.array([glcm])
             prediction = model.predict(feature)
             predicted_category_index = np.argmax(prediction)
-            categories = [Melon.MATANG,Melon.MENTAH]
+            categories = [Melon.MATANG,Melon.MENTAH,Melon.BUKAN_MELON]
             predicted_category = categories[predicted_category_index]
             
             glcm = Glcm.objects.create(

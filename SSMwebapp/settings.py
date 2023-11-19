@@ -130,3 +130,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MQTT_SERVER = 'broker.emqx.io'
+MQTT_PORT = 1883
+MQTT_KEEPALIVE = 60
+MQTT_USER = ''
+MQTT_PASSWORD = ''

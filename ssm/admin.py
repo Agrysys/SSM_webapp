@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Melon,Glcm
+from .models import Melon
 
 # Register your models here.
 admin.site.register(Melon)
-admin.site.register(Glcm) 

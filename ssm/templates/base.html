@@ -6,9 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}| SSM{% endblock %}</title>
     <style>
-        table, th, td {
-          border: 1px solid black;
-        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: center;
+          }
+          
+          th {
+            background-color: green;
+            color: white;
+            padding: 8px;
+          }
+          
+          td {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          
+          tr:nth-child(even) {
+            background-color: #f2f2f2;
+          }
+          
+          .table-melon-title{
+            display: flex;
+            justify-content: center;
+            color: #000;
+            font-family: Inter,Arial;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
 
         img {
             width : 100px;

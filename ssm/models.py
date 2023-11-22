@@ -1,5 +1,6 @@
 from django.db import models
 from skimage.feature import graycomatrix, graycoprops
+import cv2
 
 import numpy as np
 import cv2
@@ -78,10 +79,45 @@ class Melon(models.Model):
         else:
             print("No last melon found.")
             
-    def canny_edge(img):
-        canny = cv2.Canny(img, 100, 200)
-        resized_canny = cv2.resize(canny, (150, 150))
-        # Convert the single-channel image back to a three-channel image
-        return resized_canny
 
+    def canny_edge(img):
+            canny = cv2.Canny(img, 100, 200)
+            resized_canny = cv2.resize(canny, (150, 150))
+            # Convert the single-channel image back to a three-channel image
+            return resized_canny
     
+    def crop_otomatis(image):
+        input_image = image
+
+        height = input_image.shape[0]
+        width = input_image.shape[1]
+
+        # Checking image is grayscale or not. If image shape is 2 then gray scale otherwise not
+        if len(input_image.shape) == 2:
+            gray_input_image = input_image.copy()
+        else:
+            # Converting BGR image to grayscale image
+            gray_input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
+
+        # # To find upper threshold, we need to apply Otsu's thresholding
+        upper_threshold, thresh_input_image = cv2.threshold(
+            gray_input_image, thresh=0, maxval=255, type=cv2.THRESH_BINARY + cv2.THRESH_OTSU
+        )
+        # # Calculate lower threshold
+        lower_threshold = 0.5 * upper_threshold
+
+        # Apply canny edge detection
+        canny = cv2.Canny(input_image, lower_threshold, upper_threshold)
+        # canny = cv2.Canny(input_image, 100, 200)
+        # Finding the non-zero points of canny
+        pts = np.argwhere(canny > 0)
+
+        # Finding the min and max points
+        y1, x1 = pts.min(axis=0)
+        y2, x2 = pts.max(axis=0)
+
+        # Crop ROI from the givn image
+        output_image = input_image[y1:y2, x1:x2]
+        return output_image
+
+

@@ -14,6 +14,7 @@ from django.utils import timezone
 from datetime import date, timedelta
 from django.db.models import Count
 from django.db.models.functions import Trunc
+from keras.preprocessing import image
 
 
 def index(request):
@@ -52,8 +53,39 @@ def coba(request):
     return HttpResponse(edges, content_type='image/png')
 
 @csrf_exempt
+def predict2(request):
+    model = load_model("ssm\model_terbaik.h5")
+    response = JsonResponse
+    data = {
+        "kode_melon":"",
+        "kelas":""
+    }
+    if request.method == 'POST':
+        image_file = request.FILES['image']
+        image_data = image_file.read()
+        nparr = np.fromstring(image_data, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        # file_path = default_storage.save('storage/melon/' + image_file.name, image_file)
+        try:
+            canney = Melon.canny_edge(img)
+            print(canney.shape)
+            npcanny = np.array([canney])
+            predict = model.predict(npcanny)
+            predicted_category_index = np.argmax(predict)
+            categories = [Melon.BUKAN_MELON,Melon.MATANG,Melon.MENTAH,]
+            predicted_category = categories[predicted_category_index]
+            print(f"prediksi = {predicted_category}")
+            kode_melon = Melon.generate_kode_melon(predicted_category)
+            data["kelas"] = predicted_category
+            data["kode_melon"] = kode_melon
+        except cv2.error as e:
+            error = {"error":e}
+            response = JsonResponse(data=error,status=500)
+        return response
+
+@csrf_exempt
 def predict(request):
-    model = load_model("ssm/model_melon_gray_glcm_ep-30_btsz-32_optz-Adam_lyr-(32)(16)-acrsy85.71428656578064.h5")
+    model = load_model("ssm\modelmodel-edge_ann.h5")
     response = JsonResponse
     data = {
         "kode_melon":"",
@@ -69,49 +101,26 @@ def predict(request):
             img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
             glcm = Glcm.extract_glcm_features_all_angles(img_gray)
             feature = np.array([glcm])
-            prediction = model.predict(feature)
+            edge = cv2.Canny(img,100,200)
+            edge_rgb = cv2.cvtColor(edge,cv2.COLOR_GRAY2RGB)
+            edge_rgb_sized = cv2.resize(edge_rgb,(150,150))
+            # img = image.load_img(img_path, target_size=(img_width, img_height))
+            img_keras = image.img_to_array(edge_rgb_sized)
+            img_fited_dimension = np.expand_dims(img_keras, axis=0)
+            prediction = model.predict(img_fited_dimension)
             predicted_category_index = np.argmax(prediction)
-            categories = [Melon.MATANG,Melon.MENTAH,Melon.BUKAN_MELON]
+            categories = [Melon.BUKAN_MELON,Melon.MATANG,Melon.MENTAH]
             predicted_category = categories[predicted_category_index]
             
-            glcm = Glcm.objects.create(
-                contrast_0=glcm[0],
-                contrast_45=glcm[1],
-                contrast_90=glcm[2],
-                contrast_135=glcm[3],
-                dissimilarity_0=glcm[4],
-                dissimilarity_45=glcm[5],
-                dissimilarity_90=glcm[6],
-                dissimilarity_135=glcm[7],
-                homogeneity_0=glcm[8],
-                homogeneity_45=glcm[9],
-                homogeneity_90=glcm[10],
-                homogeneity_135=glcm[11],
-                energy_0=glcm[12],
-                energy_45=glcm[13],
-                energy_90=glcm[14],
-                energy_135=glcm[15],
-                correlation_0=glcm[16],
-                correlation_45=glcm[17],
-                correlation_90=glcm[18],
-                correlation_135=glcm[19],
-                asm_0=glcm[20],
-                asm_45=glcm[21],
-                asm_90=glcm[22],
-                asm_135=glcm[23]
-            )
-            
             kode_melon = str(Melon.generate_kode_melon(predicted_category))
-            melon = Melon.objects.create(
-                kode_melon=kode_melon,
-                image=file_path,
-                object_class=predicted_category,
-                pub_date=timezone.now(), 
-                Glcm=glcm
-            )
-            
-            glcm.save()
-            melon.save()
+            # melon = Melon.objects.create(
+            #     kode_melon=kode_melon,
+            #     image=file_path,
+            #     object_class=predicted_category,
+            #     pub_date=timezone.now(), 
+            #     Glcm=glcm
+            # )
+            # melon.save()
             
             data["kelas"] = predicted_category
             data["kode_melon"] = kode_melon

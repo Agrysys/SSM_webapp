@@ -2,6 +2,7 @@ from django.db import models
 from skimage.feature import graycomatrix, graycoprops
 
 import numpy as np
+import cv2
 
 class Glcm(models.Model):
     contrast_0 = models.FloatField()
@@ -76,5 +77,11 @@ class Melon(models.Model):
             return kode+s_kosong+str(kode_counter)
         else:
             print("No last melon found.")
+            
+    def canny_edge(img):
+        canny = cv2.Canny(img, 100, 200)
+        resized_canny = cv2.resize(canny, (150, 150))
+        # Convert the single-channel image back to a three-channel image
+        return resized_canny
 
     

@@ -5,7 +5,8 @@ from . import views
 app_name = "ssm"
 api_Patern = [
     path("predict/class",views.predict, name="get class"),
-    path("glcm/<str:pk>",views.get_glcm, name= "get_glcm")
+    path("glcm/<str:pk>",views.get_glcm, name= "get_glcm"),
+    path("predict",views.predict2, name="prediction")
 ]
 
 urlpatterns = [

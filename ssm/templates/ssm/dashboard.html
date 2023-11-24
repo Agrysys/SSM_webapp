@@ -1,13 +1,56 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}dashboard{% endblock title %}
 {% block content %}
-<h1>Dashboard</h1>
-<ul>
-    <li>matang      : {{jumlah_matang}}</li>
-    <li>mentah      : {{jumlah_mentah}}</li>
-    <li>bukan melon : {{jumlah_bukan}}</li>
-    <li>total       : {{jumlah_total}}</li>
-</ul>
+<div class="header-wrapper">
+  <span>Hello User,</span>
+  <h3>Welcome Back</h3>
+</div>
+<div class="cards">
+  <div class="card">
+      <div class="card-content">
+          <div class="number">{{jumlah_matang}}</div>
+          <div class="cardname">Melon Matang</div>
+      </div>
+      <div class="icon-box">
+          <img src="{% static "assets/mm.png" %}" width="40px" height="40px">
+      </div>
+  </div>
+  <div class="card">
+      <div class="card-content">
+          <div class="number">{{jumlah_mentah}}</div>
+          <div class="cardname">Tidak Matang</div>
+      </div>
+      <div class="icon-box">
+          <img src="{% static "assets/tm.png" %}" width="45px" height="45px">
+      </div>
+  </div>
+  <div class="card">
+      <div class="card-content">
+          <div class="number">{{jumlah_total}}</div>
+          <div class="cardname">Melon</div>
+      </div>
+      <div class="icon-box">
+          <img src="{% static "assets/m.png" %}" width="40px" height="40px">
+      </div>
+  </div>
+  <div class="card">
+      <div class="card-content">
+          <div class="number">{{jumlah_bukan}}</div>
+          <div class="cardname">Bukan Melon</div>
+      </div>
+      <div class="icon-box">
+          <img src="{% static "assets/bm.png" %}" width="50px" height="50px">
+      </div>
+  </div>
+</div>
+<div class="container">
+  <div class="chart">
+      <h2>Data yang masuk</h2>
+      <canvas id="barChart" width="300" height="300"></canvas>
+  </div>
+</div>
+
 
 <div>
     <canvas id="myChart"></canvas>
@@ -15,7 +58,7 @@
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
-  <script>
+  {% comment %} <script>
     const ctx = document.getElementById('myChart');
 
     const label_tanggal = JSON.parse('{{ label_chart|safe }}')
@@ -38,5 +81,5 @@
         }
       }
     });
-  </script>
+  </script> {% endcomment %}
 {% endblock content %}

@@ -134,7 +134,7 @@ def dashboard(request):
     
     
     context = {
-        "jumlah_total":total,
+        "jumlah_total":(total- bukan),
         "jumlah_matang":matang,
         "jumlah_mentah":mentah,
         "jumlah_bukan":bukan,

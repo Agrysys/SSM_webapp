@@ -1,73 +1,64 @@
 
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}| SSM{% endblock %}</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            text-align: center;
-          }
-          
-          th {
-            background-color: green;
-            color: white;
-            padding: 8px;
-          }
-          
-          td {
-            border: 1px solid #ddd;
-            padding: 8px;
-          }
-          
-          tr:nth-child(even) {
-            background-color: #f2f2f2;
-          }
-          
-          .table-melon-title{
-            display: flex;
-            justify-content: center;
-            color: #000;
-            font-family: Inter,Arial;
-            font-size: 30px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-          }
 
-        img {
-            width : 100px;
-            height : 100px;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "style.css" %}">
 
-        #myChart{
-            height : 100px;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <h1>Sistem Sortir Melon</h1>
-    </header>
-    <nav>
-        <h2>navigasi</h2>
-        <ul>
-            <li><a href="{% url "ssm:dashboard" %}">dashboard</a></li>
-        
-            <li><a href="{% url "ssm:data.melon" %}">data melon</a></li>
-        </ul>
-    </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+    <div class="container">
+        <div class="sidebar">
+            <div class="header">
+                <div class="list-item">
+                    <a href="#">
+                        <h1 class="description-header">Sistem Sortir Melon</h1>
+                    </a>
+                </div>
 
-    <footer>
+                <div class="illustration">
+                    <img src="{% static "assets/agrysys.png" %}" width="130px" height="130px">
+                </div>
+            </div>
+            <div class="main">
+                <div class="list-item">
+                    <a href="{% url "ssm:dashboard" %}">
+                        <img src="{% static "assets/menu (2).png" %}" width="30px" height="30px" class="icon">
+                        <span class="description">Dashboard</span>
+                    </a>
+                </div>
+            </div>
+            <div class="main">
+                <div class="list-item">
+                    <a href="{% url "ssm:data.melon" %}">
+                        <img src="{% static "assets/list.png" %}" width="30px" height="30px" class="icon">
+                        <span class="description">Details</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div >
+            
+        </div>
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% comment %} <footer>
         <p>© 2023 Agrysy</p>
-    </footer>
+    </footer> {% endcomment %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static "chart.js" %}"></script>
 </body>
 </html>

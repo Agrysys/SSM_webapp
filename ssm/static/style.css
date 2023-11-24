@@ -1,0 +1,189 @@
+*{
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #00332E;
+    width: 280px;
+    padding: 30px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;   
+}
+
+.sidebar .description-header {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 12px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.sidebar .header .list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 8px;
+    background-color: #00332E;
+    height: 40px ;
+    box-sizing: border-box;
+}
+.sidebar .header .list-item .icon {
+    margin-right: 12px;
+
+}
+
+.sidebar .header .illustration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 10px 0 22px 0;
+    box-sizing: border-box;
+}
+
+.sidebar .main .list-item .description {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    color: #FFFFFF; 
+}
+
+.sidebar .main .list-item .icon {
+    margin-right: 12px;
+    width: 30px;
+    height: 30px;
+}
+
+.sidebar .main .list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 22px 10px;  
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all ease-in .2s;
+}
+
+.sidebar .main .list-item:hover {
+    background: black;
+    transition: all ease-in .2s;
+}
+
+.main-content {
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+    background: #FFFFFF;
+    flex-grow: 1;
+}
+
+.cards {
+    width: 100%;
+    padding: 35px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.cards .card {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ebeceb;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+}
+
+.chart {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px rgba(0, 0, 0, 0.08);
+    width: 100%;
+}
+
+.number {
+    font-size: 35px;
+    font-weight: 500;
+    color: #299b63;
+}
+
+.card-name {
+    color: #888;
+    font-weight: 600;
+}
+
+.icon-box {
+    font-size: 45px;
+    color: #299b63;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: green;
+    color: white;
+    padding: 8px;
+  }
+  
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table-melon-title{
+    display: flex;
+    justify-content: center;
+    color: #000;
+    font-family: Inter,Arial;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+img {
+    width : 100px;
+    height : 100px;
+}
+
+#myChart{
+    height : 100px;
+}

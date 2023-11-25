@@ -16,8 +16,10 @@ class Melon(models.Model):
         (BUKAN_MELON,"not melon")
     ]
     kode_melon = models.TextField(verbose_name="kode melon",primary_key=True,max_length=10)
-    image = models.ImageField(upload_to="melon/raw/", blank=True, null=True)
+    image = models.ImageField(upload_to="melon/raw", blank=True, null=True)
+    crop = models.ImageField(upload_to="melon/crop",blank=True,null=True)
     edge = models.ImageField(upload_to="melon/edge", blank=True, null=True)
+    edge_resize = models.ImageField(upload_to="melon/resize", blank=True, null=True)
     object_class = models.TextField(choices=CLASS_MELON)
     pub_date = models.DateField()
     

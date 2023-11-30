@@ -47,13 +47,41 @@
 <div class="custom-container">
   <div class="chart">
     <h2>Data yang masuk</h2>
-    <canvas id="barChart" width="300" height="300"></canvas>
+    <canvas id="myChart" width="300" height="100"></canvas>
   </div>
 </div>
-
-<div>
-  <canvas id="myChart"></canvas>
-</div>
+<script>
+  fetch('http://127.0.0.1:8000/ssm/api/v1/melon/lastweek')
+    .then(response => response.json())
+    .then(data => {
+      const labels = ['Today', 'Yesterday', '2 days ago', '3 days ago', '4 days ago', '5 days ago', '6 days ago'];
+      const chartData = {
+        labels: labels,
+        datasets: [{
+          label: 'jumlah melon',
+          data: Object.values(data),
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      };
+      const config = {
+        type: 'bar',
+        data: chartData,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      };
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

@@ -2,6 +2,7 @@ from django.db import models
 from skimage.feature import graycomatrix, graycoprops
 import cv2
 
+
 import numpy as np
 import cv2
 # Create your models here.
@@ -52,9 +53,6 @@ class Melon(models.Model):
     def crop_otomatis(image):
         input_image = image
 
-        height = input_image.shape[0]
-        width = input_image.shape[1]
-
         # Checking image is grayscale or not. If image shape is 2 then gray scale otherwise not
         if len(input_image.shape) == 2:
             gray_input_image = input_image.copy()
@@ -62,16 +60,8 @@ class Melon(models.Model):
             # Converting BGR image to grayscale image
             gray_input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
 
-        # # To find upper threshold, we need to apply Otsu's thresholding
-        upper_threshold, thresh_input_image = cv2.threshold(
-            gray_input_image, thresh=0, maxval=255, type=cv2.THRESH_BINARY + cv2.THRESH_OTSU
-        )
-        # # Calculate lower threshold
-        lower_threshold = 0.5 * upper_threshold
-
         # Apply canny edge detection
-        canny = cv2.Canny(input_image, lower_threshold, upper_threshold)
-        # canny = cv2.Canny(input_image, 100, 200)
+        canny = cv2.Canny(image, 100, 200)
         # Finding the non-zero points of canny
         pts = np.argwhere(canny > 0)
 

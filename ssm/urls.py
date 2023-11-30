@@ -5,7 +5,8 @@ from . import views
 app_name = "ssm"
 api_Patern = [
     path("predict/class",views.predict, name="get class"),
-    path('glcm/<str:kode>',views.get_glcm, name='get glcm')
+    path('glcm/<str:kode>',views.get_glcm, name='get glcm'),
+    path('melon/lastweek',views.get_count_in_a_week, name='lastweek')
 ]
 
 urlpatterns = [

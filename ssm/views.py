@@ -17,6 +17,7 @@ from django.db.models import Count
 from django.db.models.functions import Trunc
 from keras.preprocessing import image
 from skimage.feature import graycomatrix, graycoprops
+from datetime import datetime, timedelta
 
 
 
@@ -58,13 +59,30 @@ def coba(request):
 @csrf_exempt
 def get_count_in_a_week(request):
     # Dapatkan tanggal 7 hari yang lalu
-    week_ago = timezone.now() - datetime.timedelta(days=7)
+    last_week = datetime.now() - timedelta(days=7)
+    
+    # Hitung jumlah buah melon yang terjual dalam seminggu terakhir
+    count_melon_today = Melon.objects.filter(pub_date__gte=datetime.now().date()).count()
+    count_melon_min1 = Melon.objects.filter(pub_date__gte=(datetime.now() - timedelta(days=1)).date(), pub_date__lt=datetime.now().date()).count()
+    count_melon_min2 = Melon.objects.filter(pub_date__gte=(datetime.now() - timedelta(days=2)).date(), pub_date__lt=(datetime.now() - timedelta(days=1)).date()).count()
+    count_melon_min3 = Melon.objects.filter(pub_date__gte=(datetime.now() - timedelta(days=3)).date(), pub_date__lt=(datetime.now() - timedelta(days=2)).date()).count()
+    count_melon_min4 = Melon.objects.filter(pub_date__gte=(datetime.now() - timedelta(days=4)).date(), pub_date__lt=(datetime.now() - timedelta(days=3)).date()).count()
+    count_melon_min5 = Melon.objects.filter(pub_date__gte=(datetime.now() - timedelta(days=5)).date(), pub_date__lt=(datetime.now() - timedelta(days=4)).date()).count()
+    count_melon_min6 = Melon.objects.filter(pub_date__gte=(datetime.now() - timedelta(days=6)).date(), pub_date__lt=(datetime.now() - timedelta(days=5)).date()).count()
+    
+    # Kembalikan hasil
+    return JsonResponse(
+        {
+        "0": count_melon_today,
+        "1": count_melon_min1,
+        "2": count_melon_min2,
+        "3": count_melon_min3,
+        "4": count_melon_min4,
+        "5": count_melon_min5,
+        "6": count_melon_min6,
+        }
+    )
 
-    # Hitung jumlah melon setiap hari dalam seminggu terakhir
-    melon_counts = Melon.objects.filter(pub_date__gte=week_ago).annotate(date=models.functions.TruncDate('pub_date')).values('date').annotate(count=Count('kode_melon')).order_by('date')
-
-    for melon_count in melon_counts:
-        print(f"Tanggal: {melon_count['date']}, Jumlah Melon: {melon_count['count']}")
 
 @csrf_exempt
 def get_glcm(request,kode):

@@ -3,6 +3,7 @@
 SSMwebapp/__pycache__/settings.cpython-311.pyc
 SSMwebapp/__pycache__/urls.cpython-311.pyc
 ssm/__pycache__/views.cpython-311.pyc
+ssm/__pycache__/urls.cpython-311.pyc
 
 # Django #
 ##########

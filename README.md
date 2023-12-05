@@ -32,11 +32,15 @@ Deskripsi singkat tentang proyek Anda.
    ```
    env/bin/activate
    ```
-6. Install dependensi:
+   or
+   ```
+    env/Scripts/activate
+   ```
+7. Install dependensi:
     ```
     pip install -r requirements.txt
     ```
-7. Migrasi database
+8. Migrasi database
     ```
     py manage.py migrate
     ```

@@ -22,14 +22,15 @@ class MelonTest(models.Model):
     pub_date = models.DateField()
     
     def generate_kode_melon(kode):
-        if MelonTest.objects.filter(kode_melon__startswith=kode).exists():
-            last_melon = MelonTest.objects.filter(kode_melon__startswith=kode).order_by('kode_melon').last()
+        print(kode)
+        if MelonTest.objects.filter(kode_melon__startswith="T"+kode).exists():
+            last_melon = MelonTest.objects.filter(kode_melon__startswith="T"+kode).order_by('kode_melon').last()
             print(f"Last melon: {last_melon}")
         else:
             return "T"+kode+"0000001"
         
         if last_melon is not None:
-            kode_counter = int(last_melon.kode_melon[2:])
+            kode_counter = int(last_melon.kode_melon[3:])
             print(f"Kode counter 1: {kode_counter}")
             kode_counter += 1
             s_kosong = str("")

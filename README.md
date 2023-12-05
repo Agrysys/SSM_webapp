@@ -36,7 +36,10 @@ Deskripsi singkat tentang proyek Anda.
     ```
     pip install -r requirements.txt
     ```
-
+7. Migrasi database
+    ```
+    py manage.py migrate
+    ```
 ## Penggunaan
 
 Untuk menjalankan server pengembangan Django, gunakan perintah berikut:

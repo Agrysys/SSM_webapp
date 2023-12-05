@@ -10,9 +10,9 @@
     <label for="melonClass" class="form-label">Pilih kelas melon</label>
     <select class="form-select" name="kelas" aria-label="Default select example">
       <option selected>pilih class yang sebenarnya</option>
-      <option value="0">Raw</option>
+      <option value="2">Raw</option>
       <option value="1">Mature</option>
-      <option value="2">Not Melon</option>
+      <option value="0">Not Melon</option>
     </select>
   </div>
   <button type="button" id="form-button" class="btn btn-primary">Submit</button>
@@ -28,7 +28,7 @@
     var formData = new FormData($('form')[0]);
   
     $.ajax({
-      url: 'http://127.0.0.1:8000/ssm/api/v1/predict/class',
+      url: '{% url "guest:predict_test" %}',
       type: 'POST',
       data: formData,
       processData: false,

@@ -9,6 +9,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from .models import Melon
+from guest.models import MelonTest
 from tensorflow.keras.models import load_model
 from django.core.files.storage import default_storage
 from django.utils import timezone
@@ -141,6 +142,10 @@ def predict(request):
 def data_melons(request):
     melon = Melon.objects.all
     return render(request,"ssm/data_melons.html",{'melons':melon})
+
+def data_melon_test(request):
+    melon_test = MelonTest.objects.all
+    return render(request,"ssm/test_melon.html",{'melons':melon_test})
 
 def dashboard(request):
     total = Melon.objects.count()

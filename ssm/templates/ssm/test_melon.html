@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% block title %}test{% endblock title %}
+{% block content %}
+<h2>Melons</h2>
+<p class="table-melon-title">Rincian Data Melon yang Masuk</p>
+<table>
+  <tr>
+      <th>kode melon</th>
+      <th>citra melon</th>
+      <th>predicted kelas</th>
+      <th>actual class</th>
+      <th>tanggal</th>
+      <th>aksi</th>
+  </tr>
+  {% load static %}
+  {% for melon in melons %}
+  <tr 
+  data-asli="{% if melon.image %}{{melon.image.url}}{% else %}/storage/melon/no_im.jpeg{% endif %}" 
+  data-crop="{% if melon.crop %}{{melon.crop.url}}{% else %}/storage/melon/no_im.jpeg{% endif %}" 
+  data-edge="{% if melon.edge %}{{melon.edge.url}}{% else %}/storage/melon/no_im.jpeg{% endif %}" 
+  data-final="{% if melon.edge_resize %}{{melon.edge_resize.url}}{% else %}/storage/melon/no_im.jpeg{% endif %}"
+  >
+
+      <td>{{melon.kode_melon}}</td>
+      <td><img src="{{melon.image.url}}" alt="{{melon.image.url}}"></td>
+      <td>{{melon.predicted_class}}</td>
+      <td>{{melon.actual_class}}</td>
+      <td>{{melon.pub_date}}</td>
+      <td>
+        <button type="button" class="btn btn-info"  data-toggle="modal" data-target="#modalCitra">proses</button>
+        <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modelGlcm">glcm</button>
+      </td>
+  </tr>
+  {% endfor %}
+</table>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelGlcm">
+Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modelGlcm" tabindex="-1" role="dialog" aria-labelledby="modelGlcmTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header bg-success text-white">
+      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card">
+        <div class="card-body bg-success text-white">
+          <h5 class="card-title">Fitur GLCM</h5>
+          <div class="card-content">
+            <div class="row">
+              <div class="col">
+                <h6>Contrast</h6>
+                <p class="card-text">
+                  <strong>0:</strong> 16008.729191529867<br>
+                  <strong>135:</strong> 19764.48834715935<br>
+                </p>
+              </div>
+              <div class="col">
+                <h6>Dissimilarity</h6>
+                <p class="card-text">
+                  <strong>0:</strong> 62.779330162862216<br>
+                  <strong>135:</strong> 77.50779743984059<br>
+                </p>
+              </div>
+              <div class="col">
+                <h6>Correlation</h6>
+                <p class="card-text">
+                  <strong>0:</strong> 0.23180590299396528<br>
+                  <strong>45:</strong> 0.08146574938294955<br>
+                  <strong>135:</strong> 0.052407398364249694<br>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCitra" tabindex="-1" role="dialog" aria-labelledby="modalCitraTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header bg-success text-white">
+      <h5 class="modal-title" id="exampleModalLongTitle">Preprosesing citra</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="font-weight-bold">Citra Asli</p>
+          <img class="img-fluid" id="citra-asli" src="http://127.0.0.1:8000/storage/melon/raw/Copy%20of%20m2_JuH1MaD.png" alt="citra melon asli">
+        </div>
+        <div class="col-md-6">
+          <p class="font-weight-bold">Crop Background Citra Secara Otomatis</p>
+          <img class="img-fluid" id="citra-crop" src="http://127.0.0.1:8000/storage/melon/crop/MM00000017.png" alt="citra croped">
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <p class="font-weight-bold">Buat Menjadi Canny Edge Untuk Memperjelas Jala Melon</p>
+          <img class="img-fluid" id="citra-edge" src="http://127.0.0.1:8000/storage/melon/edge/MM00000017.png" alt="citra edeg canny">
+        </div>
+        <div class="col-md-6">
+          <p class="font-weight-bold">Normalisasi Ukuran Citra Menjadi 150*150</p>
+          <img class="img-fluid" id="citra-final" src="http://127.0.0.1:8000/storage/melon/resize/MM00000017.png" alt="citra final">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<script>
+
+
+// Dapatkan semua tombol dengan class 'btn-info'
+var buttons = document.querySelectorAll('.btn-info');
+
+// Tambahkan event listener ke setiap tombol
+for (var i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', function() {
+      // Dapatkan elemen tr yang merupakan parent dari tombol
+      var tr = this.parentElement.parentElement;
+
+      // Dapatkan nilai atribut data dari elemen tr
+      var dataAsli = tr.getAttribute('data-asli');
+      var dataCrop = tr.getAttribute('data-crop');
+      var dataEdge = tr.getAttribute('data-edge');
+      var dataFinal = tr.getAttribute('data-final');
+
+      // Simpan nilai atribut data ke dalam variabel
+      var asli = dataAsli;
+      var crop = dataCrop;
+      var edge = dataEdge;
+      var final = dataFinal;
+
+      gantiSrcGambar(asli,crop,edge,final)
+
+      // Lakukan sesuatu dengan variabel...
+      console.log([asli, crop, edge, final]);
+  });
+}
+
+document.querySelectorAll('.btn-success').forEach(button => {
+button.addEventListener('click', function() {
+  var kodeMelon = this.closest('tr').querySelector('td:first-child').textContent;
+  fetch(`http://127.0.0.1:8000/ssm/api/v1/glcm/${kodeMelon}`)
+    .then(response => response.json())
+    .then(data => {
+      document.querySelector('.card-content .row .col:nth-child(1) .card-text').innerHTML = `
+        <strong>0:</strong> ${data.contrast_0}<br>
+        <strong>135:</strong> ${data.contrast_135}<br>
+      `;
+      document.querySelector('.card-content .row .col:nth-child(2) .card-text').innerHTML = `
+        <strong>0:</strong> ${data.dissimilarity_0}<br>
+        <strong>135:</strong> ${data.dissimilarity_135}<br>
+      `;
+      document.querySelector('.card-content .row .col:nth-child(3) .card-text').innerHTML = `
+        <strong>0:</strong> ${data.correlation_0}<br>
+        <strong>45:</strong> ${data.correlation_45}<br>
+        <strong>135:</strong> ${data.correlation_135}<br>
+      `;
+    });
+});
+});
+
+
+
+function gantiSrcGambar(srcAsli, srcCrop, srcEdge, srcFinal) {
+  document.getElementById('citra-asli').src = srcAsli;
+  document.getElementById('citra-crop').src = srcCrop;
+  document.getElementById('citra-edge').src = srcEdge;
+  document.getElementById('citra-final').src = srcFinal;
+}
+</script>
+{% endblock content %}

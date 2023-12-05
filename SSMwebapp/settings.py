@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'widget_tweaks',
     'ssm',
     'guest',
 ]
@@ -125,6 +127,7 @@ MEDIA_URL = '/storage/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"storage")
 
 STATICFILES_DIRS = [
+    BASE_DIR / "static",
     BASE_DIR / "static",
     "/var/www/static/",
 ]

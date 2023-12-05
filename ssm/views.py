@@ -19,43 +19,6 @@ from keras.preprocessing import image
 from skimage.feature import graycomatrix, graycoprops
 from datetime import datetime, timedelta
 
-
-
-def index(request):
-    path = "prediction\storage\Copy of m6.png"
-    # Read the image
-    img = cv2.imread(path)
-    # Convert to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # Detect edges
-    edges = cv2.Canny(gray, 100, 200)
-    # Convert to binary
-    _, binary = cv2.threshold(edges, 127, 255, cv2.THRESH_BINARY)
-    # Convert to PIL images
-    img_pil = Image.fromarray(img)
-    binary_pil = Image.fromarray(binary)
-    # Create a BytesIO object
-    img_io = io.BytesIO()
-    # Save the images to the BytesIO object
-    img_pil.save(img_io, 'PNG')
-    binary_pil.save(img_io, 'PNG')
-    # Seek to the beginning of the BytesIO object
-    img_io.seek(0)
-    # Return a HttpResponse with the image data and the content type
-    return HttpResponse(img_io, content_type='image/png')
-
-def coba(request):
-    image = cv2.imread("prediction\storage\Copy of m6.png")
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # Deteksi tepi menggunakan metode Canny
-    edges = cv2.Canny(gray, 100, 200)
-    
-    img_io = io.BytesIO()
-    
-    
-    return HttpResponse(edges, content_type='image/png')
-
 @csrf_exempt
 def get_count_in_a_week(request):
     # Dapatkan tanggal 7 hari yang lalu

@@ -1,6 +1,43 @@
-<h1>Melon Test Form</h1>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %} 
-  {{ form.as_p }}
-  <button type="submit">Submit</button>
+{% extends "guest/base.html" %} 
+{% block title %}prediction{%endblock title %} 
+{% block content %}
+<form>
+  <div class="mb-3">
+    <label class="form-label" for="customFile">Default file input example</label>
+<input type="file" name="image" class="form-control" id="customFile" />
+  </div>
+  <div class="mb-3">
+    <label for="melonClass" class="form-label">Pilih kelas melon</label>
+    <select class="form-select" name="kelas" aria-label="Default select example">
+      <option selected>pilih class yang sebenarnya</option>
+      <option value="0">Raw</option>
+      <option value="1">Mature</option>
+      <option value="2">Not Melon</option>
+    </select>
+  </div>
+  <button type="button" id="form-button" class="btn btn-primary">Submit</button>
 </form>
+
+<p>hasil prediksi : <span id="hasil">...</span></p>
+
+<script>
+  $('#form-button').on('click', function(event) {
+    event.preventDefault();
+    $('#hasil').text("...");
+  
+    var formData = new FormData($('form')[0]);
+  
+    $.ajax({
+      url: 'http://127.0.0.1:8000/ssm/api/v1/predict/class',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        $('#hasil').text(response.kelas);
+      }
+    });
+  });
+  
+</script>
+{% endblock content %}

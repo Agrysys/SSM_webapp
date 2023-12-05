@@ -1,0 +1,331 @@
+{% extends "guest/base.html" %} 
+{% block title %}prediction{%endblock title %}
+{% block content %}
+{% load static %}
+
+ <!-- ======= Header ======= -->
+<header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+      {% comment %} <h1 class="logo me-auto"><a href="index.html">Arsha</a></h1> {% endcomment %}
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="index.html" class="logo me-auto"><img src={% static "guest\assets\img\agrysys.png" %} alt="" class="img-fluid"></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h1>Sistem Sortir Kematangn Melon</h1>
+          <h2>mensortir kematangan melon dari intensitas jala di kulit melon</h2>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src={% static "guest/assets/img/hero-img.png" %} class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients section-bg">
+      <div class="container">
+
+        <div class="row" data-aos="zoom-in">
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={% static "guest/assets/img/clients/polije-logo.png" %} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={% static "guest/assets/img/clients/tensorflow-logo.png" %} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={% static "guest/assets/img/clients/opencv-logo.png" %} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={% static "guest/assets/img/clients/django-logo.png" %} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={% static "guest\assets\img\clients\esp-logo.png" %} class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src={% static "guest\assets\img\clients\logo-aab.png" %} class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Cliens Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About Us</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              Agrysys sebuah kelompok penelitian kecil yang beranggotakan 5 mahasiswa IT untuk mengembangkan Sistem Sortir Melon Otoamtis. Untuk mewujudkan sistem tersebut kami melakukan beberapa hal berikut
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i>mengkaji preprosesign yang cocok untuk citra yang digunakan</li>
+              <li><i class="ri-check-double-line"></i>melatih model AI agar dapat digunakan untuk mengklasifikasi sebuah citra</li>
+              <li><i class="ri-check-double-line"></i>Merancangn sistem tertanam sehingga dapat menyortir melon secara otomatis</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+                Kami berdedikasi dalam mengembangkan teknologi kecerdasan buatan (AI) yang inovatif untuk mengklasifikasi tingkat kematangan melon. Selain itu, kami juga menciptakan perangkat otomatis yang mampu menyortir buah melon berdasarkan tingkat kematangannya. Perangkat ini didukung oleh teknologi Internet of Things (IoT) dan ditenagai oleh AI, menciptakan solusi yang efisien dan akurat dalam proses sortir buah melon. Kami berkomitmen untuk memberikan teknologi terbaik bagi pertanian masa depan.
+            </p>
+            <a href="#team" class="btn-learn-more">Team</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Berikut beberapa service yang telah siap digunakan, namun beberapa masih dalam tahap eksperimental</p>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="">Edge detection</a></h4>
+              <p>Mengubah citra RGB menjadi citra binary yang hanya menampilkan tepi dari gambar</p>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4><a href="">Teksture ekstract</a></h4>
+              <p>Menampilkan ekstraksi tekstur dari citra malalui nilai nilai GLCM</p>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="{% url "guest:prediction" %}">Prediksi Melon</a></h4>
+              <p>Memprediksi citra melon, apakah melon tersebut matang atau tidak. dilihat dari jala yang terlihat di kulit melon</p>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-layer"></i></div>
+              <h4><a href="">Sortir Melon</a></h4>
+              <p>Sistem tertanam yang ditenagai oleh AI, sehingga dapat menyortir melon matang dan mentah</p>
+            </div>
+          </div>
+
+        </div>
+
+        {% comment %} <div class="mt-3 card">
+            
+            <div class="container">
+                <h4>prediksi citra melon</h4>
+                <form action="">
+                    <label for="citra-predict" class="form-label">masukan citra yang akan diprediksi</label>
+                    <input class="form-control" type="file" id="citra-predict">
+                </form>
+              </div>
+        </div> {% endcomment %}
+
+      </div>
+    </section><!-- End Services Section -->
+
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="row">
+          <div class="col-lg-9 text-center text-lg-start">
+            <h3>Call To Action</h3>
+            <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-lg-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="#">Call To Action</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+        <div class="mb-3">
+            <div class="d-flex justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+                <div class="member d-flex align-items-start">
+                  <div class="pic"><img src={% static "guest/assets/img/team/bachtiar.jpeg" %} class="img-fluid" alt=""></div>
+                  <div class="member-info">
+                    <h4>Bachtiar Arya Habibie</h4>
+                    <span>Team Lead & Data science</span>
+                    <p>Memastikan team bekerja secara efisien dan mengembangkan AI klasifikasi Kematangan Melon</p>
+                    <div class="social">
+                      <a href="mailto:bachtiararyahabibie1@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                      <a href="https://www.facebook.com/bachtiararya.habibie/" target="blank"><i class="fa-brands fa-facebook"></i></a>
+                      <a href="https://www.instagram.com/b.a_habibie/" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                      <a href="https://www.linkedin.com/in/bachtiar-arya-habibie/" target="blank"> <i class="fa-brands fa-linkedin"></i> </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src={% static "guest/assets/img/team/fagil.jpeg" %} class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>FAGIL NURIL AKBAR</h4>
+                <span>Embeded System Engineer</span>
+                <p>Merancang dan mengembangkan sistem yang dapat mensortir melon</p>
+                <div class="social">
+                    <a href="mailto:fagilnuri18@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://www.facebook.com/ajril.nurfianto" target="blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/nurilfagil/" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/fagil-nuril-akbar/" target="blank"> <i class="fa-brands fa-linkedin"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src={% static "guest/assets/img/team/roni.jpeg" %} class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Slamet Daroeni</h4>
+                <span>Software Enginer</span>
+                <p>Develop program untuk preprosessing citra sebelum diolah di sistem cerdas</p>
+                <div class="social">
+                    <a href="mailto:kemalslamet29@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="" target="blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/kemaltemals/" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/slamet-daroini-aa2039259/" target="blank"> <i class="fa-brands fa-linkedin"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src={% static "guest/assets/img/team/zulfi.jpeg" %} class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Zulfianti Ashilah</h4>
+                <span>Software Engineer & UIUX</span>
+                <p>design website layout and Develop the design into website</p>
+                <div class="social">
+                    <a href="mailto:viviashilah14@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="" target="blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/zulfiashilah_/" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/zulfianti-ashilah-b7b001222/" target="blank"> <i class="fa-brands fa-linkedin"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src={% static "guest\assets\img\team\syifa.jpeg" %} class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Ahamd Syifa</h4>
+                <span>Embeded System Engineer</span>
+                <p>Merancang dan mengembangkan sistem yang dapat mensortir melon</p>
+                <div class="social">
+                    <a href="mailto:ahmadsyifa173@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="" target="blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/anonimously_people/" target="blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/ahmad-syifa-492626221/" target="blank"> <i class="fa-brands fa-linkedin"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+
+{% endblock content %}

@@ -75,7 +75,7 @@ def predict_test(request):
                 edge = edge_path,
                 edge_resize = edge_resize_path,
                 predicted_class=predicted_category,
-                actual_class="TM",
+                actual_class=actual_class,
                 pub_date=timezone.now(), 
             )
             melon.save()

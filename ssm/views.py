@@ -147,6 +147,27 @@ def data_melon_test(request):
     melon_test = MelonTest.objects.all
     return render(request,"ssm/test_melon.html",{'melons':melon_test})
 
+
+# def melon_view(request):
+#     if request.method == 'POST':
+#         form = MelonForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             melon = Melon()
+#             melon.kode_melon = form.cleaned_data['kode_melon']
+#             melon.image = form.cleaned_data['img_raw']
+#             melon.crop = form.cleaned_data['img_crop']
+#             melon.edge = form.cleaned_data['img_canny']
+#             melon.edge_resize = form.cleaned_data['img_normalization']
+#             melon.object_class = form.cleaned_data['kelas']
+#             melon.pub_date = form.cleaned_data['pub_date']
+#             melon.save()
+#             return HttpResponseRedirect('/success_url/')  # ganti dengan url tujuan setelah berhasil submit
+#     else:
+#         form = MelonForm()
+
+#     return render(request, 'template_name.html', {'form': form})  # ganti 'template_name.html' dengan nama template Anda
+
+
 def dashboard(request):
     total = Melon.objects.count()
     matang = Melon.objects.filter(object_class = Melon.MATANG).count()
